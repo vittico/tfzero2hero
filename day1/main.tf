@@ -3,14 +3,17 @@ provider "aws" {
 }
 
 provider "aws" {
-  region = "eu-west-1"
-  alias = "drp"
+  region  = "eu-west-1"
+  alias   = "drp"
   profile = terraform.workspace
 }
 
+variable "test" {
+  default = false
+}
+
 resource "aws_s3_bucket" "bucket_de_prueba" {
-  provider = aws.drp
-  provider = ""
+  count = var.test ? 1 : 0
 }
 
 
